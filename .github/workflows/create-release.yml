@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag (e.g. v1.83.0-stable)"
+        description: Release tag (e.g. v1.83.0-stable)
         required: true
         type: string
       commit_hash:
-        description: "Full 40-char commit SHA to target"
+        description: Full 40-char commit SHA to target
         required: true
         type: string
 
@@ -17,7 +17,7 @@ permissions: {}
 jobs:
   release:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:

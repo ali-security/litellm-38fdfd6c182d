@@ -5,12 +5,13 @@ on:
     branches:
       - main # Change this to the default branch of your repository
 
+      - master
 permissions:
   contents: read
 
 jobs:
   read-version:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code

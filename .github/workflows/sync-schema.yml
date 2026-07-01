@@ -3,7 +3,7 @@ name: Sync schema.prisma copies
 on:
   pull_request:
     paths:
-      - 'schema.prisma'
+      - schema.prisma
 
 # Scoped to ONLY the permissions needed:
 # - contents:write to push the sync commit to the PR branch
@@ -14,7 +14,7 @@ permissions:
 jobs:
   sync:
     name: Copy root schema to proxy and proxy-extras
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     # Only run on PRs from branches in THIS repo (not forks).
     # Fork PRs cannot push back to the head branch with GITHUB_TOKEN,

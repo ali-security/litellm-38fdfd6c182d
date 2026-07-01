@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - master
   merge_group:
 
 permissions: {}
@@ -14,7 +15,7 @@ permissions: {}
 jobs:
   guard:
     name: Verify PR source branch
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
       - name: Reject merge_group events

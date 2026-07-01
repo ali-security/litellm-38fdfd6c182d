@@ -6,12 +6,13 @@ on:
     branches:
       - main
 
+      - master
 permissions:
   contents: read
 
 jobs:
   unit-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -21,7 +22,7 @@ jobs:
       - name: Set up Helm 3.11.1
         uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4.3.1
         with:
-          version: "3.11.1"
+          version: 3.11.1
 
       - name: Install Helm Unit Test Plugin
         run: |

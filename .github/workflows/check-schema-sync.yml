@@ -3,9 +3,9 @@ name: Check Schema Sync
 on:
   pull_request:
     paths:
-      - 'schema.prisma'
-      - 'litellm/proxy/schema.prisma'
-      - 'litellm-proxy-extras/litellm_proxy_extras/schema.prisma'
+      - schema.prisma
+      - litellm/proxy/schema.prisma
+      - litellm-proxy-extras/litellm_proxy_extras/schema.prisma
 
 permissions:
   contents: read
@@ -13,7 +13,7 @@ permissions:
 jobs:
   check-sync:
     name: Verify schema.prisma copies match root
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - name: Checkout PR

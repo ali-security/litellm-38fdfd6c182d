@@ -4,18 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       threshold:
-        description: "Similarity threshold (0-1)"
+        description: Similarity threshold (0-1)
         required: false
-        default: "0.85"
+        default: '0.85'
       close:
-        description: "Actually close duplicates (false = dry run)"
+        description: Actually close duplicates (false = dry run)
         required: false
         type: boolean
         default: false
 
 jobs:
   scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       issues: write
       contents: read
@@ -29,7 +29,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Scan for duplicate issues
         env:

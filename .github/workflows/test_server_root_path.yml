@@ -8,16 +8,16 @@ on:
       - main
       - litellm_internal_staging
       - litellm_oss_branch
-      - "litellm_**"
+      - litellm_**
 
 jobs:
   test-server-root-path:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     strategy:
       matrix:
-        root_path: ["/api/v1", "/llmproxy"]
+        root_path: [/api/v1, /llmproxy]
 
     steps:
       - name: Checkout repository

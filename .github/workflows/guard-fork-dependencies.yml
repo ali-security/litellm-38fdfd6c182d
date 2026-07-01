@@ -6,19 +6,19 @@ on:
       - main
       - litellm_internal_staging
       - litellm_oss_branch
-      - "litellm_**"
+      - litellm_**
     paths:
-      - "uv.lock"
-      - "pyproject.toml"
-      - "litellm-proxy-extras/pyproject.toml"
-      - "enterprise/pyproject.toml"
+      - uv.lock
+      - pyproject.toml
+      - litellm-proxy-extras/pyproject.toml
+      - enterprise/pyproject.toml
 
 permissions: {}
 
 jobs:
   guard:
     name: Block fork dependency changes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     if: github.event.pull_request.head.repo.full_name != github.repository
     steps:

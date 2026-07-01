@@ -1,9 +1,9 @@
-name: "Unit Tests: Proxy DB Operations"
+name: 'Unit Tests: Proxy DB Operations'
 
 # Uses DATABASE_URL secret — only runs on trusted branches, not PRs.
 on:
   push:
-    branches: [main, "litellm_**"]
+    branches: [main, litellm_**]
 
 permissions:
   contents: read
@@ -21,7 +21,7 @@ concurrency:
 #     Most of a shard's time is pytest plugin load + xdist worker imports +
 #     pytest-cov instrumentation, not the tests themselves. Keeping per-shard
 #     work low and matching worker count to runner cores is what controls it.
-#   * workers: 4 matches the 4-core ubuntu-latest runner. -n 8 on 4 cores
+#   * workers: 4 matches the 4-core ubuntu-24.04 runner. -n 8 on 4 cores
 #     oversubscribes 2x and workers fight for CPU during their cold-start
 #     imports (measured ~441% CPU for -n 8 locally, i.e. ~55% effective).
 #   * test_key_generate_prisma.py stays serial (workers=0) — it has event-loop
@@ -40,7 +40,7 @@ jobs:
   # every test file being explicitly assigned; this guard prevents a new
   # file from silently dropping out of CI.
   assert-shard-coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 2
     permissions:
       contents: read
@@ -90,7 +90,7 @@ jobs:
         include:
           # Must run serially — event-loop conflict with the logging worker.
           - test-group: key-generation
-            test-path: "tests/proxy_unit_tests/test_key_generate_prisma.py"
+            test-path: tests/proxy_unit_tests/test_key_generate_prisma.py
             workers: 0
             dist: loadscope
             timeout: 20
@@ -116,7 +116,7 @@ jobs:
 
           # ---- test_proxy_utils.py, single shard, worksteal distribution ----
           - test-group: proxy-utils
-            test-path: "tests/proxy_unit_tests/test_proxy_utils.py"
+            test-path: tests/proxy_unit_tests/test_proxy_utils.py
             workers: 4
             dist: worksteal
             timeout: 15
@@ -171,7 +171,7 @@ jobs:
           # skips the 4-worker cold-start cost we'd otherwise pay for a
           # single test, saving ~4 minutes of wall-clock.
           - test-group: schema-migration
-            test-path: "tests/proxy_unit_tests/test_db_schema_migration.py"
+            test-path: tests/proxy_unit_tests/test_db_schema_migration.py
             workers: 0
             dist: loadscope
             timeout: 15
